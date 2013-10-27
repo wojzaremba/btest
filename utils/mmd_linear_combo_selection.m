@@ -33,12 +33,7 @@ hh=zeros(II,m2);
 % compute MMD for all non-zeros weights (=dimensions)
 for ii=1:II
     % average of sum of kernel diagonals
-%     K_XX = rbf_dot_diag(X(1:m2,ii),X(m2+1:m,ii),sigma);
-%     K_YY = rbf_dot_diag(Y(1:m2,ii),Y(m2+1:m,ii),sigma);
-%     K_XY = rbf_dot_diag(X(1:m2,ii),Y(m2+1:m,ii),sigma);
-%     K_YX = rbf_dot_diag(X(m2+1:m,ii),Y(1:m2,ii),sigma);
-%         K_XX+K_YY-K_XY-K_YX;
-    hh(ii,:)=SumExtended(X, Y, innersize, ii, sigma);
+    hh(ii,:)=sum_extended(X, Y, innersize, ii, sigma);
     mmds(ii)=mean(hh(ii,:));
 end
 

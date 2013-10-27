@@ -80,15 +80,7 @@ hh=zeros(lss,m2);
 
 % single kernel selection methods are evaluated for all kernel sizes
 for i=1:lss
-    % compute kernel diagonals
-%     K_XX = rbf_dot_diag(X(1:m2,:),X(m2+1:m,:),sigmas(i));
-%     K_YY = rbf_dot_diag(Y(1:m2,:),Y(m2+1:m,:),sigmas(i));
-%     K_XY = rbf_dot_diag(X(1:m2,:),Y(m2+1:m,:),sigmas(i));
-%     K_YX = rbf_dot_diag(X(m2+1:m,:),Y(1:m2,:),sigmas(i));
-    
-    % this corresponds to the h-statistic that the linear time MMD is the
-    % average of
-    hh(i,:)=SumExtended( X, Y, innersize, 1:size(X,2), sigmas(i));%K_XX+K_YY-K_XY-K_YX;
+    hh(i,:)=sum_extended( X, Y, innersize, 1:size(X,2), sigmas(i));
     mmds(i)=mean(hh(i,:));
     
     %variance computed using h-entries from linear time statistic

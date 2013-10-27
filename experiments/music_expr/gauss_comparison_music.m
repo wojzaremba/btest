@@ -24,9 +24,9 @@ for block_idx = 1:length(xaxis)
         [Xsame, ~] = get_data(2*data_params.m,data_params);    
         [Ysame, ~] = get_data(2*data_params.m,data_params);    
         [Xdiff, Ydiff] = get_data(2*data_params.m,data_params);            
-        tmp = SumExtended( Xsame, Ysame, xaxis(block_idx), 1:1000, sig );
+        tmp = sum_extended( Xsame, Ysame, xaxis(block_idx), 1:1000, sig );
         vals_same_(i) = sum(tmp) / length(tmp);
-        tmp = SumExtended( Xdiff, Ydiff, xaxis(block_idx), 1:1000, sig );
+        tmp = sum_extended( Xdiff, Ydiff, xaxis(block_idx), 1:1000, sig );
         vals_diff_(i) = sum(tmp) / length(tmp);       
     end    
     vals_same{block_idx}(vals_same_ ~= 0) = vals_same_(vals_same_ ~= 0);

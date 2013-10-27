@@ -29,17 +29,7 @@ hh=zeros(dim,m2);
 
 % single kernel selection methods are evaluated for all dimensions
 for i=1:dim
-    % compute kernel diagonals, use i-th dimension only
-
-%     K_XX = rbf_dot_diag(X(1:m2,i),X(m2+1:m,i),sigma);
-%     K_YY = rbf_dot_diag(Y(1:m2,i),Y(m2+1:m,i),sigma);
-%     K_XY = rbf_dot_diag(X(1:m2,i),Y(m2+1:m,i),sigma);
-%     K_YX = rbf_dot_diag(X(m2+1:m,i),Y(1:m2,i),sigma);
-    
-    % this corresponds to the h-statistic that the linear time MMD is the
-    % average of
-    hh(i,:)= SumExtended(X, Y, innersize, i, sigma);
-%     hh(i,:)=K_XX+K_YY-K_XY-K_YX;
+    hh(i,:)= sum_extended(X, Y, innersize, i, sigma);
     mmds(i)=mean(hh(i,:));
     
     % variance computed using h-entries from linear time statistic

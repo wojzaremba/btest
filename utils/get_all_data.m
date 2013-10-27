@@ -2,7 +2,7 @@ function [ X, Y ] = get_all_data( data_params, alg_params )
     X = cell(alg_params.num_trials, 1);
     Y = cell(alg_params.num_trials, 1);
     m=data_params.m;
-    parfor nn=1:alg_params.num_trials;
+    for nn=1:alg_params.num_trials;
         fprintf('Generating data %d/%d\n', nn, alg_params.num_trials);
         randn('seed', nn);
         rand('seed', nn);

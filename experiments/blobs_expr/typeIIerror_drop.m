@@ -1,10 +1,7 @@
-% clear all
-% close all
-cd /home/wojto/bio/Dropbox/Wojciechs_shared/nips2013/code/blobs_expr
 xaxis = 2.^(1:6);
 sigma_types = {'single', 'median', 'multiple'};
 acc = zeros(length(xaxis), length(sigma_types));
-addpath('..');
+addpath(genpath('../../'));
 [ data_params, alg_params ] = initializeblobs(1000);
 data_params.location = 'testIIerror_drop';    
 alg_params.type = 'opt';
@@ -12,8 +9,6 @@ data_params.same = 0;
 [ X, Y ] = get_all_data( data_params, alg_params );
 % inner block size makes distribution non-Gaussian
 acc(6, 3) = NaN;
-% biggest_k = fit_kstest( X{1}(1:1000, :), Y{1}(1:1000, :) );
-% biggest_k = fit_kstest( X{1}, Y{1});
 for s_idx = 1:length(sigma_types)
     alg_params.sigma_type = sigma_types{s_idx};
     for i = 1:length(xaxis)

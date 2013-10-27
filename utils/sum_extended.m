@@ -1,4 +1,4 @@
-function [ sum ] = SumExtended( X, Y, innersize, i, sigma )
+function [ sum ] = sum_extended( X, Y, innersize, i, sigma )
     sum = 0;
     m=size(X,1);
     m2=floor(m/innersize);
@@ -12,7 +12,5 @@ function [ sum ] = SumExtended( X, Y, innersize, i, sigma )
             sum = sum - rbf_dot_diag(Y(idx1,i), X(idx2,i), sigma);
         end
     end
-    % XXX : big change
-%     sum = sum / (innersize * (innersize - 1));
 end
 

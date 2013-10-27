@@ -14,7 +14,6 @@ h1 = plot(Xplot{1}, Yplot{1}, '.-r');
 hold on
 h2 = plot(Xplot{2}, Yplot{2}, '--b');
 h3 = plot(Xplot{3}, Yplot{3}, '-.g');
-% XXX support with data
 h4 = plot(2000, 0, 'r*', 'Color', [0.2,0.7,0]);
 h5 = plot(2000, 0.95, 'c*', 'Color', [0.4,0,0.6]);
 set(h1, 'LineWidth', 3);

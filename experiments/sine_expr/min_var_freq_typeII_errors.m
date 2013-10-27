@@ -1,7 +1,4 @@
-% clear all
-% close all
-cd /home/wojto/bio/Dropbox/Wojciechs_shared/nips2013/code/sine_expr
-addpath('..');
+addpath(genpath('../../'));
 num_trails = 1000;
 data_types = {'mean', 'var', 'sine'};
 
@@ -13,15 +10,10 @@ for data_type_idx = 1:length(data_types)
 
     data_params_diff = data_params;
     data_params_diff.same = 0;
-    Xsame = [];
-    Ysame = [];
-    Xdiff = [];
-    Ydiff = [];
-%     [ Xsame, Ysame ] = get_all_data( data_params_same, alg_params );
-%     [ Xdiff, Ydiff ] = get_all_data( data_params_diff, alg_params );
+    [ Xsame, Ysame ] = get_all_data( data_params_same, alg_params );
+    [ Xdiff, Ydiff ] = get_all_data( data_params_diff, alg_params );
 
-    data_params_same.which_data = [data_params_same.which_data, 'same0'];
-    data_params_diff.which_data = [data_params_diff.which_data, 'same1'];
+    params_diff.which_data = [data_params_diff.which_data, 'same1'];
 
     types = {'opt', 'btest'};
 
