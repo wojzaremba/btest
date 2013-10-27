@@ -1,5 +1,5 @@
 addpath(genpath('.'));
-num_samples = 1000;
+num_samples = 20;
 
 % Data generation.
 R = [cos(pi / 4), -sin(pi / 4); sin(pi / 4), cos(pi / 4)];
