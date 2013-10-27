@@ -18,7 +18,6 @@ for i = 1 : num_samples
     Y{i} = (randn(2, 1) + repmat(mu, 1, 1))';    
 end
 
-
 [~, p] = btest(X(1 : num_samples), X((num_samples + 1) : end));
 fprintf(['p value = %f > 0.05 for data comming from the same ' ...
          'distribution. This should fail 5%% of the time. \n'], p);
