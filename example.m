@@ -19,9 +19,10 @@ for i = 1 : num_samples
 end
 
 
-[~, p] = btest(X(1:num_samples), X((num_samples + 1) : end));
+[~, p] = btest(X(1 : num_samples), X((num_samples + 1) : end));
 fprintf(['p value = %f > 0.05 for data comming from the same ' ...
-        'distribution. This should fail 5%% of the time. \n'], p);
+         'distribution. This should fail 5%% of the time. \n'], p);
 
-[~, p] = btest(X(1:num_samples), Y);
-fprintf('p value = %f < 0.05 for data comming from the different distributions\n', p);
+[~, p] = btest(X(1 : num_samples), Y);
+fprintf(['p value = %f < 0.05 for data comming from the different ' ... 
+         'distributions\n'], p);

@@ -1,13 +1,16 @@
-function [h, p] = btest(X, Y, kernel)
+function [h, p] = btest(X, Y, kernel, blocksize)
     if (~exist('kernel', 'var'))
         kernel = @rbf_dot_diag;
     end
-    innersize = floor(sqrt(length(X)));
+    if (~exist('blocksize', 'var'))
+        blocksize = floor(sqrt(length(X)));
+    end
     m = size(X,1);
-    m2 = floor(m / innersize);
+    assert(blocksize >= 2 && blocksize < m2 / 3);    
+    m2 = floor(m / blocksize);
     hh = zeros(m2, 1);
-    for x = 1 : innersize
-        for y = (x + 1) : innersize
+    for x = 1 : blocksize
+        for y = (x + 1) : blocksize
             idx1 = ((m2 * (x - 1)) + 1) : (m2 * x);
             idx2 = ((m2 * (y - 1)) + 1) : (m2 * y);
             hh = hh + kernel(X(idx1), X(idx2));
