@@ -15,6 +15,7 @@ for i = 1 : (2 * num_samples)
 end
 % 3 x 3 Gaussian blobs.
 for i = 1 : num_samples
+    mu = [randi(5) * 15; randi(5) * 15];	
     Y{i} = (randn(2, 1) + repmat(mu, 1, 1))';    
 end
 
