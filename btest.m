@@ -23,9 +23,11 @@
 % * 'BlockSize' - Block size used in B-test. square root of number 
 %                 of samples (default)
 % 
-% More on it under http://www.cs.nyu.edu/~zaremba/docs/btest.pdf .
+% More on it under http://arxiv.org/abs/1307.1954 .
 function [h, p] = btest(X, Y, varargin)
-    m = size(X, 1);        
+    m = size(X, 1);
+    X = X(randperm(m));
+    Y = Y(randperm(m));
     okargs =   {'Alpha', 'Kernel' 'BlockSize'};
     defaults = {0.05, @rbf, floor(sqrt(length(X)))};
     [alpha, kernel, blocksize] = ...
