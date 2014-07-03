@@ -26,8 +26,7 @@
 % More on it under http://arxiv.org/abs/1307.1954 .
 function [h, p] = btest(X, Y, varargin)
     m = size(X, 1);
-    X = X(randperm(m));
-    Y = Y(randperm(m));
+    Z = [X; Y];
     okargs =   {'Alpha', 'Kernel' 'BlockSize'};
     defaults = {0.05, @rbf, floor(sqrt(length(X)))};
     [alpha, kernel, blocksize] = ...
@@ -35,6 +34,7 @@ function [h, p] = btest(X, Y, varargin)
     assert(blocksize >= 2 && blocksize < m / 3);    
     m2 = floor(m / blocksize);    
     hh = zeros(m2, 1);
+    hh_null = zeros(m2, 1);
     for x = 1 : blocksize
         for y = (x + 1) : blocksize
             idx1 = ((m2 * (x - 1)) + 1) : (m2 * x);
@@ -43,10 +43,19 @@ function [h, p] = btest(X, Y, varargin)
             hh = hh + kernel(Y(idx1), Y(idx2));
             hh = hh - kernel(X(idx1), Y(idx2));
             hh = hh - kernel(Y(idx1), X(idx2));
+            
+            idx1X = randi(size(Z, 1), 1, m2);
+            idx2X = randi(size(Z, 1), 1, m2);
+            idx1Y = randi(size(Z, 1), 1, m2);
+            idx2Y = randi(size(Z, 1), 1, m2);
+            hh_null = hh_null + kernel(Z(idx1X), Z(idx2X));
+            hh_null = hh_null + kernel(Z(idx1Y), Z(idx2Y));
+            hh_null = hh_null - kernel(Z(idx1X), Z(idx2Y));
+            hh_null = hh_null - kernel(Z(idx1Y), Z(idx2X));            
         end
     end    
     testStat = mean(hh);
-    var_est = (1 / m2) * cov(hh');
+    var_est = (1 / m2) * cov(hh_null');
     p = 1 - normcdf(testStat, 0, sqrt(var_est));
     h = p < alpha;
 end
